@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazon</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <%= link_to 'Home', root_path%> | 
+    <%= link_to 'About', about_path%> | 
+    <%= link_to 'Contact Us', contacts_new_path%> | 
+    <%= link_to 'New Product', new_product_path%> |
+    <%= link_to 'All Products', index_path%> |
+
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to 'Admin Page', admin_panel_path%> |
+    <% else %>
+      <p class="admin"><%= link_to 'Admin Page', admin_panel_path%></p>
+    <% end %>
+
+    <%= flash[:notice] || flash[:alert] %>
+
+    <% if user_signed_in? %>
+      <div>Welcome, <%= current_user.full_name%></div>
+      <%= link_to "Sign Out", sessions_path, method: :delete, data: {confirm: "Are you sure you want to sign out?"} %>
+    <% else %>
+      <%= link_to "Sign In", new_sessions_path %> |
+      <%= link_to "Sign Up", new_user_path %>
+    <% end %>
+    <hr>
+    <%= yield %>
+  </body>
+</html>

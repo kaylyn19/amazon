@@ -1,0 +1,8 @@
+<h1>List of Products</h1>
+
+<% @product.each do |items| %>
+    <h1><%= link_to items.title, show_product_path(items)%></h1>
+    <p><%= items.description%></p>
+    <p>Price : $<%= items.price %> Sales Price : $<%= items.sales_price%></p>
+
+<% end %>

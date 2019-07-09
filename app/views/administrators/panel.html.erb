@@ -1,0 +1,35 @@
+<h1>Hello, admin <%= @admin.first_name%></h1>
+<h3>There are <%= @products.count%> products</h3>
+<table class="products">
+    <tr>
+        <th>id</th>
+        <th>title</th>
+    </tr>
+    <% @products.each do |product| %>
+        <tr style="text-align: center">
+            <td><%= product.id%></td>
+            <td><%= product.title%></td>
+        </tr>
+    <% end %>        
+</table>
+
+<h3>There are <%= @users.count%> users</h3>
+<table class="users">
+    <tr>
+        <th>id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+    </tr>
+    <% @users.each do |user| %>
+        <tr>
+            <td><%= user.id%></td>
+            <td><%= user.first_name%></td>
+            <td><%= user.last_name%></td>
+            <td><%= user.email%></td>
+        </tr>
+    <% end %>        
+</table>
+
+
+<h3>There are <%= @reviews.count%> reviews</h3>
