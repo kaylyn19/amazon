@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
     private
 
     def product_params
-        params.require(:product).permit(:title, :description, :price, :sales_price)
+        params.require(:product).permit(:title, :description, :price, :sales_price, :tag_name)#, {tag_ids: []})
     end
 
     def find_product
@@ -75,6 +75,6 @@ class ProductsController < ApplicationController
     end
 
     def authorize
-        redirect_to index_path, alert: "Not Authorized!" unless can?(:manage, @product) 
+        redirect_to index_path, alert: "Not Authorized!" unless can?(:crud, @product) 
     end
 end

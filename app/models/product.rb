@@ -49,6 +49,18 @@ class Product < ApplicationRecord
     before_validation(:capitalize_product_title)
     after_initialize(:sales_price_equal_to_price)
     validate :reserved_name
+    before_validation :tag_name
+
+    def tag_name
+        self.tags.map {|tag| tag.name}.join(', ')
+    end
+
+    def tag_name=(custom_tags)
+        self.tags = custom_tags.strip.split(',').map do |tag_name|
+            Tag.find_or_initialize_by(name: tag_name)
+        end
+    end
+
     private
 
     def set_default_price_to_1

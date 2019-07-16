@@ -23,6 +23,9 @@
         <%= p.label :sales_price%>
         <%= p.text_field :sales_price%>
     </div>
+    <div>
+        <%#= collection_check_boxes(:product, :tag_ids, Tag.all, :id, :name) %>
+        Custom Tags: <%= p.text_field :tag_name%>
+    </div>
     <%= p.submit%>
-
 <% end %>
