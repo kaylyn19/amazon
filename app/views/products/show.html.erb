@@ -15,7 +15,7 @@
 
 <div>Tag:
 <%@product.tags.each do |tag|%>
-    <p class="badge badge-primary"><%= tag.name%></p>
+    <p class="badge badge-dark"><%= link_to tag.name, index_path(tag: tag.name) %></p>
 <% end %>
 </div>
 

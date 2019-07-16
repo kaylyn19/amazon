@@ -1,6 +1,9 @@
 <h1>List of Products</h1>
 
 <% @product.each do |items| %>
+    <% if params[:tag]%>
+        <p class="badge badge-dark"><%= params[:tag]%> tag</p>
+    <% end %>
     <h1><%= link_to items.title, show_product_path(items)%></h1>
     <p><%= items.description%></p>
     <p>Price : $<%= items.price %> Sales Price : $<%= items.sales_price%></p>
