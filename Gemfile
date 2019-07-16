@@ -35,6 +35,9 @@ gem 'cancancan'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem "selectize-rails"
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
+
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

@@ -1,5 +1,5 @@
 class ProductMailer < ApplicationMailer
-    def new_product(product, product_owner)
+    def new_product(product)
         @product = product
         @product_owner = @product.user
         mail(

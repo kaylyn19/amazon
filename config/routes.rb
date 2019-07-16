@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   get '/favourites', to: 'welcome#favourite'
 
   resources :news_articles
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
 end

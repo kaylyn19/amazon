@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
         @product = Product.new product_params
         @product.user = current_user
         if @product.save
-            ProductMailer.new_product(@product, @product.user).deliver_now
+            ProductMailer.new_product(@product).deliver_later
             redirect_to show_product_path(@product)
             # render plain: "product saved!"
         else
