@@ -29,3 +29,15 @@
     </div>
     <%= p.submit%>
 <% end %>
+
+<script>
+$('#product_tag_name').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            name: input
+        }
+    }
+});
+</script>

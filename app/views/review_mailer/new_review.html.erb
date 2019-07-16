@@ -1,0 +1,23 @@
+<h2>Hi, <%= @product_owned_by.full_name %></h2>
+
+<p>
+    <%= @review.user.full_name%> reviewed your question
+    titled: <br/>
+    <span><%= @product.title%></span>
+</p>
+
+<p>
+    The review is: <br/>
+    <span><%= @review.body%></span>
+</p>
+
+<p>
+    <%= @review.user.full_name%> gave your product the rating of: <%= @review.rating%><br/>
+</p>
+
+<%= link_to "click here to view your product", product_url(@product) %>
+
+<p>
+    Cheers, <br/>
+    Amazon
+</p>

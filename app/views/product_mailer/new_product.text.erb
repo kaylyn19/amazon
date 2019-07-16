@@ -1,0 +1,13 @@
+Hi, <%= @product_owner.full_name %>
+
+    Your product is successfully created.
+
+    Details of your new product
+    Product Name: <%= @product.title%>
+    Description: <%= @product.description%>
+    Price: $<%= @product.price%>
+
+    <%= link_to "Click here to check out the product in the following link", product_url(@product)%>
+
+    Cheers, 
+    Amazon

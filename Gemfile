@@ -34,6 +34,7 @@ gem 'faker'
 gem 'cancancan'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
+gem "selectize-rails"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rails-controller-testing'
   gem 'factory_bot_rails'
+  gem "letter_opener"
 end
 
 group :development do

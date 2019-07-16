@@ -1,9 +1,10 @@
 <h1>My Favourite Products</h1>
 <hr>
-<% Product.favourites.find_by(user: current_user).each do |list| %>
+<% current_user.favourite_products.each do |product| %>
     <div>
-        <h3>Product: <%=list.product.title%></h3>
-        <p>Price: <%= list.product.price%><p>
+        <h3>Product: <%=product.title%></h3>
+        <p>Price: <%= product.price%><p>
+        <p>Favourites: <%= product.favourites.count%><p>
     </div>
     <hr>
 <% end %>
