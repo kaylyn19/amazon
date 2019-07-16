@@ -13,6 +13,7 @@ class Ability
     #     can :read, :all
       end
     #
+    alias_action :create, :read, :update, :destroy, to: :crud
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions
@@ -31,13 +32,24 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
+    alias_action :create, :read, :update, :destroy, to: :crud
+
     if user.present?
-      can :manage, Product, user_id: user.id #Product.user_id = user.id
+      can :crud, Product, user_id: user.id #Product.user_id = user.id
     end
 
-    can(:manage, Review) do |review|
-      review.user == user
+    can(:crud, Review) do |review|
+      review.user == user || user.admin?
     end
 
+    can(:crud, NewsArticle) do |news_article|
+      news_article.user == user
+    end
+
+    # can :like, Review 
+
+    can(:like, Review) do |review|
+      user.present? && review.user != user
+    end
   end
 end

@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
 
     def destroy
         review =Review.find(params[:id])
-        if can?(:manage, review)
+        if can?(:crud, review)
             review.destroy
             redirect_to show_product_path(review.product_id), notice: "deleted!"
         else
@@ -37,7 +37,7 @@ class ReviewsController < ApplicationController
     end
 
 
-    def hidden
+    def toggle_hidden
         @review =Review.find(params[:id])
         if !@review.hidden?
             @review.update(hidden: true)
@@ -46,4 +46,10 @@ class ReviewsController < ApplicationController
         end
         redirect_to product_path(@review.product)
     end
+
+    # def toggle_hidden
+    #     # update the boolean field 'hidden' to whatever it isn't currently
+    #     @review.update(hidden: !@review.hidden?)
+    #     redirect_to product_path(@review.product), notice: "Review #{@review.hidden ? 'hidden' : 'shown'}."
+    # end
 end

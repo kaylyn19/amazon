@@ -24,6 +24,18 @@ class ProductsController < ApplicationController
         # @product = Product.find params[:id]
         @review = Review.new # instantiates and creates and object of Parameters
         @reviews = @product.reviews.order(created_at: :desc)
+
+         # In this case only the product owner will have all reviews available in the
+        # through @reviews (including hidden reviews).
+        # You could also remove this logic here and do some logic in the view. Your use case (and
+        # for now, the size of your Rails toolset) will determine the best way to things.
+        # We've done it this way because with the tools available to us it minimizes the
+        # amount of repeated code and if else statements in our view.
+        if can? :crud, @product
+            @reviews = @product.reviews.order(created_at: :desc)
+        else
+            @reviews = @product.reviews.where(hidden: false).order(created_at: :desc)
+        end
     end
 
     def index
@@ -33,7 +45,7 @@ class ProductsController < ApplicationController
     def destroy
         flash[:notice] = "Product deleted!"
         # product = Product.find params[:id]
-        product.destroy
+        @product.destroy
         redirect_to index_path
     end
 

@@ -18,10 +18,15 @@ Rails.application.routes.draw do
 
   post '/products/:product_id/reviews', {to: "reviews#create", as: :product_reviews}
   delete '/products/:product_id/reviews/:id', {to: "reviews#destroy", as: :product_review}
-  patch '/products/:product_id/reviews/:id', {to: "reviews#hidden", as: :product_hidden}
+  patch "/reviews/:id/toggle" => "reviews#toggle_hidden", as: "toggle_hidden"
 
   resources :users, only: [:new, :create]
   resource :sessions, only: [:new, :create, :destroy]
 
+  post '/products/:product_id/reviews/:review_id/likes', {to: "likes#create", as: :product_review_likes}
+  delete '/products/:product_id/reviews/:review_id/likes/:id', {to: "likes#destroy", as: :product_review_like}
+
   get '/admin/panel', to: 'administrators#panel'
+
+  resources :news_articles
 end
