@@ -26,7 +26,12 @@ Rails.application.routes.draw do
   post '/products/:product_id/reviews/:review_id/likes', {to: "likes#create", as: :product_review_likes}
   delete '/products/:product_id/reviews/:review_id/likes/:id', {to: "likes#destroy", as: :product_review_like}
 
+  resources :products do
+    resources :favourites, only: [:create, :destroy]
+  end
+
   get '/admin/panel', to: 'administrators#panel'
+  get '/favourites', to: 'welcome#favourite'
 
   resources :news_articles
 end

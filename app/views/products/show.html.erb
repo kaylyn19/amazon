@@ -4,10 +4,21 @@
 <p>Sales Price: <%= @product.sales_price%></p>
 <p>created at: <%= @product.created_at%></p>
 
+<p><%= @product.favourites.count %> favourites</p>
+<% if can?(:favourite, @product)%>
+    <% if @product.favourites.find_by(user: current_user).present? %>
+        <%= link_to "💔Un-favourite💔", product_favourite_path(@product, @product.favourites.find_by(user: current_user)), method: :delete %>
+    <% else %>
+        <%= link_to "❤️Favourite❤️", product_favourites_path(@product), method: :post %>
+    <% end %>
+<% end %>
+
+
 <% if can?(:crud, @product) %>
     <%= link_to "Delete", show_product_path(@product.id), method: :delete, data:{confirm: "Do you want to delete this product?"}%>
     <%= link_to "Edit", edit_product_path(@product)%>
 <% end %>
+
 
 
 <hr/>

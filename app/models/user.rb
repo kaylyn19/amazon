@@ -7,6 +7,8 @@ class User < ApplicationRecord
     has_many :liked_reviews, through: :likes, source: :review
     # throug hthe joined table, i can fetch the review that the user has liked
     # liked_reviews is not a real table in db
+    has_many :favourites, dependent: :destroy
+    has_many :favourite_products, through: :favourites, source: :product
 
     validates :first_name, presence: true
     validates :last_name, presence: true

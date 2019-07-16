@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
     belongs_to :user
     has_many(:reviews, dependent: :destroy)
+    has_many :favourites, dependent: :destroy
+    has_many :users, through: :favourites
+    has_many :taggings, dependent: :destroy
+    has_many :tags, through: :taggings
     # .reviews
     # .reviews<<(object, ...)
     # .reviews.delete(object, ...)
