@@ -34,6 +34,10 @@
 $('#product_tag_name').selectize({
     delimiter: ',',
     persist: false,
+    labelField: 'name',
+    valueField: 'name',
+    searchField: 'name',
+    options: <%= Tag.select(:name).to_json(except: [:id]).html_safe%>,
     create: function(input) {
         return {
             name: input
