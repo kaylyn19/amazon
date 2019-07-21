@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
 
     def index
         if params[:tag]
-            @tag = Tag.find_by(name: params[:tag])
+            @tag = Tag.find_or_initialize_by(name: params[:tag])
             @product = @tag.products.order(created_at: :desc)
         else
             @product = Product.all.order('created_at desc')

@@ -13,6 +13,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+//= require selectize
 //= require rails-ujs
 //= require activestorage
 //= require_tree .

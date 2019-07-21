@@ -55,5 +55,9 @@ class Ability
     can :favourite, Product do |product|
       user.present? && product.user != user
     end
+
+    can :vote, Review do |review|
+      user.present? && review.user != user
+    end
   end
 end

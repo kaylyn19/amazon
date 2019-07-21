@@ -36,4 +36,7 @@ Rails.application.routes.draw do
   resources :news_articles
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
+  resources :reviews do
+    resources :votes, only: [:create, :update]
+  end
 end

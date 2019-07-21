@@ -37,7 +37,7 @@ gem 'jquery-rails'
 gem "selectize-rails"
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
-
+gem 'acts_as_votable'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

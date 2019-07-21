@@ -6,7 +6,7 @@ class ReviewMailer < ApplicationMailer
         @product_owned_by = @product.user
         mail(
             to: @product_owned_by,
-            from: current_user,
+            # from: current_user,
             subject: "#{@review.user.first_name} reviewed your product"
         )
     end

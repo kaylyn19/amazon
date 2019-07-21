@@ -13,6 +13,9 @@
 
 # Now we'll use delete_all and just include all
 # objects that need deleting.
+Vote.delete_all
+Tagging.delete_all
+Tag.delete_all
 Favourite.delete_all
 Like.delete_all
 Review.delete_all
@@ -21,7 +24,7 @@ User.delete_all
 
 PASSWORD = "supersecret"
 NUM_OF_USERS = 20
-NUM_OF_PRODUCTS = 100
+NUM_OF_PRODUCTS = 500
 
 super_user = User.create(
   first_name: "Jon",
@@ -42,8 +45,14 @@ NUM_OF_USERS.times do |num|
     password: 'supersecret'
   )
 end
-
 users = User.all
+
+20.times.map do
+  Tag.create(
+  name: Faker::Book.genre
+  )
+end
+tags = Tag.all
 
 NUM_OF_PRODUCTS.times do
   created_at = Faker::Date.backward(365 * 5)
@@ -51,19 +60,26 @@ NUM_OF_PRODUCTS.times do
     title: Faker::Cannabis.strain,
     description: Faker::Cannabis.health_benefit,
     price: rand(100_000),
-    created_at: created_at,
-    updated_at: created_at,
+    # created_at: created_at,
+    # updated_at: created_at,
     user: users.sample
   })
 
   if p.valid?
-    rand(0..5).times.each do
+    p.tags = tags.shuffle.slice(0..rand(tags.count/2))
+    # rand(0..20).times.each do
+    #   Tag.create(
+    #     name: Faker::Book.genre
+    #   )
+    # end
+
+    rand(0..20).times.each do
       Favourite.create(
         user: users.sample,
         product: p
       )
     end
-    rand(0..10).times.each do
+    rand(0..20).times.each do
       r = Review.create(
         rating: Faker::Number.between(1, 5),
         body: Faker::TvShows::Seinfeld.quote,
@@ -71,10 +87,19 @@ NUM_OF_PRODUCTS.times do
         user: users.sample
       )
       if r.valid?
-        rand(0..5).times.each do
+        # r.likers = users.shuffle.slice(0,rand(users.count))
+        rand(0..10).times.each do
           Like.create(
             user: users.sample,
             review: r
+          )
+        end
+
+        users.shuffle.slice(0, rand(users.count)).each do |user|
+          Vote.create(
+            user: user,
+            review: r,
+            upvote: Faker::Boolean.boolean(0.6)
           )
         end
       end
@@ -87,3 +112,5 @@ puts "Created #{Product.count} products"
 puts "Created #{Review.count} reviews"
 puts "Created #{Like.count} likes"
 puts "Created #{Favourite.count} favourites"
+puts "Created #{Tag.count} tags"
+puts "Created #{Vote.count} votes"

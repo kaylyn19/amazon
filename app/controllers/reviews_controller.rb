@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
         @review.user = current_user
         if @review.save
             flash[:notice] = "A new comment has been added!"
-            ReviewMailer.new_review(@review).deliver_now
+            # ReviewMailer.new_review(@review).deliver_now
             redirect_to show_product_path(@review.product_id) 
         else
             @reviews = @product.reviews.order(created_at: :desc)
