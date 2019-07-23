@@ -39,4 +39,11 @@ Rails.application.routes.draw do
   resources :reviews do
     resources :votes, only: [:create, :update]
   end
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      resources :products
+      resource :session, only: [:create, :destroy]
+    end
+  end
 end
